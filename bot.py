@@ -49,6 +49,7 @@ def download_and_send(chat_id, url, message_id):
       }],
       "outtmpl": "%(id)s.%(ext)s",
       "noplaylist": True,
+      "extractor_args": {"youtube": {"player_client": ["android"]}},
       "http_headers": {
           "User-Agent": (
               "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
@@ -90,6 +91,7 @@ def handle_message(message):
     ydl_opts = {
         "extract_flat": True,
         "max_downloads": 5,
+        "extractor_args": {"youtube": {"player_client": ["android"]}},
         "http_headers": {
             "User-Agent": (
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
@@ -138,3 +140,4 @@ def callback_inline(call):
 
 
 bot.infinity_polling()
+
