@@ -42,9 +42,9 @@ def download_and_send(chat_id, url, message_id):
         }],
         "outtmpl": "%(id)s.%(ext)s",
         "noplaylist": True,
-        "extractor_args": {"youtube": {"player_client": ["ios", "web"]}},
+        "extractor_args": {"youtube": {"player_client": ["tv_embedded"]}},
         "http_headers": {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         },
     }
     try:
@@ -81,9 +81,9 @@ def handle_message(message):
         ydl_opts = {
             "extract_flat": True,
             "max_downloads": 5,
-            "extractor_args": {"youtube": {"player_client": ["ios", "web"]}},
+            "extractor_args": {"youtube": {"player_client": ["tv_embedded"]}},
             "http_headers": {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             },
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -127,4 +127,4 @@ def callback_inline(call):
 
 print("Bot işə düşdü...")
 bot.infinity_polling()
-    
+
