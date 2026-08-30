@@ -5,7 +5,6 @@ import telebot
 from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup
 import yt_dlp
 
-# Flask serveri (Render port tapması üçün)
 app = Flask(__name__)
 
 @app.route("/")
@@ -16,12 +15,9 @@ def run_web():
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
 
-# Flask-i arxa fonda işə salırıq
 threading.Thread(target=run_web, daemon=True).start()
 
-# Telegram Bot
 TOKEN = os.getenv("TOKEN")
-# Əgər əvvəldən qalan webhook varsa onu təmizləyirik ki, konflikt yaratmasın
 bot = telebot.TeleBot(TOKEN)
 bot.remove_webhook()
 
@@ -46,7 +42,7 @@ def download_and_send(chat_id, url, message_id):
         }],
         "outtmpl": "%(id)s.%(ext)s",
         "noplaylist": True,
-        "extractor_args": {"youtube": {"player_client": ["android"]}},
+        "extractor_args": {"youtube": {"player_client": ["ios", "web"]}},
         "http_headers": {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
         },
@@ -85,7 +81,7 @@ def handle_message(message):
         ydl_opts = {
             "extract_flat": True,
             "max_downloads": 5,
-            "extractor_args": {"youtube": {"player_client": ["android"]}},
+            "extractor_args": {"youtube": {"player_client": ["ios", "web"]}},
             "http_headers": {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
             },
@@ -131,4 +127,4 @@ def callback_inline(call):
 
 print("Bot işə düşdü...")
 bot.infinity_polling()
-  
+    
